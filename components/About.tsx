@@ -1,13 +1,24 @@
 export default function About() {
   return (
     <section className="py-16 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 sm:p-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">
-            다우 게스트하우스 이야기
-          </h2>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
+          다우 게스트하우스 이야기
+        </h2>
 
-          <div className="space-y-4 text-gray-700 leading-relaxed">
+        <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
+          {/* 건물 이미지 */}
+          <div className="rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src="/images/building.jpg"
+              alt="다우하우스 건물"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* 소개 텍스트 */}
+          <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8">
+            <div className="space-y-4 text-gray-700 leading-relaxed">
             <p>
               저희 게스트하우스는 2018년에 11개 객실로 문을 열었고, <strong className="text-gray-900">다우하우스는 많은 친구들을 의미</strong>합니다.
               '손님들이 친구이고 많은 친구들 덕분에 이 공간이 존재한다.'라는 생각을 반영한 이름입니다.
@@ -31,10 +42,11 @@ export default function About() {
               또한 1:1 맞춤형 응대로 진정한 휴식을 제공해 드립니다.
             </p>
 
-            <p className="text-lg font-semibold text-green-700 text-center mt-8">
+            <p className="text-lg font-semibold text-green-700 text-center mt-6">
               끊임없는 창의와 도전으로 차별화된 가치를 제시하는<br />
               '홍대다운' 게스트하우스로 성장하겠습니다.
             </p>
+            </div>
           </div>
         </div>
       </div>

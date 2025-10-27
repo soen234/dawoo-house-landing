@@ -7,6 +7,29 @@ import Footer from '@/components/Footer';
 import { type RoomWithAvailability } from '@/lib/supabase';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
+// 객실 타입에 따른 이미지 매핑
+const getRoomImage = (roomType: string): string => {
+  const typeMap: { [key: string]: string } = {
+    '1인실': '/room_images/room_single/161837298.jpg',
+    'single': '/room_images/room_single/161837298.jpg',
+    '싱글': '/room_images/room_single/161837298.jpg',
+    '2인실': '/room_images/room_double/162068666.jpg',
+    'double': '/room_images/room_double/162068666.jpg',
+    '더블': '/room_images/room_double/162068666.jpg',
+    '3인실': '/room_images/room_triple/161837267.jpg',
+    'triple': '/room_images/room_triple/161837267.jpg',
+    '트리플': '/room_images/room_triple/161837267.jpg',
+    '4인실': '/room_images/room_quad/161837333.jpg',
+    'quad': '/room_images/room_quad/161837333.jpg',
+    '쿼드': '/room_images/room_quad/161837333.jpg',
+    '도미토리': '/room_images/room_dormitory/161837398.jpg',
+    'dormitory': '/room_images/room_dormitory/161837398.jpg',
+    'dorm': '/room_images/room_dormitory/161837398.jpg',
+  };
+
+  return typeMap[roomType.toLowerCase()] || '/room_images/room_single/161837298.jpg';
+};
+
 export default function RoomsPage() {
   const { t } = useLanguage();
   const [rooms, setRooms] = useState<RoomWithAvailability[]>([]);
@@ -123,8 +146,12 @@ export default function RoomsPage() {
                   key={room.id}
                   className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
                 >
-                  <div className="bg-gradient-to-br from-green-100 to-blue-100 h-48 flex items-center justify-center">
-                    <span className="text-6xl">🏠</span>
+                  <div className="relative h-48 bg-gray-100">
+                    <img
+                      src={getRoomImage(room.type)}
+                      alt={room.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
