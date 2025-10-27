@@ -1,0 +1,179 @@
+{
+  "header": {
+    "title": "Da-woo House",
+    "nav": {
+      "rooms": "客房",
+      "location": "位置",
+      "reviews": "评价",
+      "faq": "常见问题"
+    },
+    "book": "立即预订"
+  },
+  "hero": {
+    "badge": "合法民宿 · 许可证 2018-000067",
+    "title": "弘大中心，",
+    "subtitle": "达宇民宿",
+    "description1": "位于安静住宅区的私人民宿，步行30秒即可到达弘大购物街。",
+    "description2": "所有客房均配有带淋浴的独立浴室。提供舒适的床上用品和基本设施，办理入住/退房当天可寄存行李。",
+    "cta": {
+      "book": "立即预订",
+      "rooms": "查看客房"
+    },
+    "stats": {
+      "rooms": "客房",
+      "walk": "步行到弘大",
+      "station": "弘大入口站",
+      "opened": "开业"
+    }
+  },
+  "rooms": {
+    "title": "搜索客房",
+    "checkIn": "入住",
+    "checkOut": "退房",
+    "search": "搜索",
+    "loading": "正在加载客房信息...",
+    "noRooms": "没有可显示的客房。",
+    "available": "可预订",
+    "price": "价格",
+    "perNight": "/晚",
+    "roomsCount": "间客房",
+    "soldOut": "已满",
+    "bookNow": "立即预订",
+    "unavailable": "不可预订",
+    "capacity": "人"
+  },
+  "booking": {
+    "title": "客房预订",
+    "selectRoom": "选择客房",
+    "selectRoomPlaceholder": "请选择客房",
+    "dates": "入住日期",
+    "nights": "晚",
+    "stay": "住宿",
+    "totalNights": "共",
+    "guestInfo": "客人信息",
+    "name": "姓名",
+    "namePlaceholder": "张三",
+    "email": "电子邮箱",
+    "emailPlaceholder": "example@email.com",
+    "phone": "电话",
+    "phonePlaceholder": "+82-10-1234-5678",
+    "numberOfGuests": "入住人数",
+    "guestsCount": "人",
+    "paymentMethod": "支付方式",
+    "paymentOnsite": "到店支付",
+    "paymentOnsiteDesc": "入住时现金或刷卡支付",
+    "paymentTransfer": "银行转账",
+    "paymentTransferDesc": "预订后将提供账户信息",
+    "paymentTransferInfo": "转账账户",
+    "paymentTransferAccount": "国民银行 123-456-789012",
+    "paymentTransferName": "账户名: 达宇民宿",
+    "paymentTransferNote": "* 请在预订后24小时内转账",
+    "paymentPaypal": "PayPal",
+    "paymentPaypalDesc": "预订后将通过邮件发送PayPal链接",
+    "paymentPaypalAccount": "PayPal账户: dawoohouse@paypal.com",
+    "paymentPaypalNote": "* 请输入电子邮箱地址以接收支付链接",
+    "summary": "预订摘要",
+    "room": "客房",
+    "period": "入住期间",
+    "guests": "入住人数",
+    "totalPrice": "总价",
+    "submitting": "预订中...",
+    "submit": "立即预订",
+    "required": "*"
+  },
+  "location": {
+    "title": "位置",
+    "entrancePhoto": "正门（入口）照片",
+    "addressLabel": "地址：",
+    "address": "首尔特别市麻浦区瓦牛山路29街12号（达宇民宿1）",
+    "subway": "弘大入口站6号出口步行5分钟",
+    "directions": "从弘大入口站6号出口出来后，在地图上搜索\"Tomoto Curry\"。进入\"Tomoto Curry\"和\"TARRTARR\"所在建筑之间的小巷即可找到住宿。",
+    "parkingWarning": "不可停车。建议使用公共交通。",
+    "mapTitle": "地图"
+  },
+  "faq": {
+    "title": "常见问题 / 使用指南",
+    "subtitle": "查看达宇民宿使用所需信息。",
+    "categories": {
+      "checkinout": "入住/退房",
+      "payment": "支付/预订",
+      "facilities": "客房设施",
+      "services": "服务",
+      "rules": "使用规则",
+      "other": "其他"
+    },
+    "items": {
+      "checkinTime": {
+        "title": "入住/退房时间",
+        "content": "入住15:00 / 退房11:00，无门禁时间。"
+      },
+      "checkinMethod": {
+        "title": "入住/进入方法",
+        "content": "可使用入住前提供的密码进入。"
+      },
+      "luggage": {
+        "title": "行李寄存",
+        "content": "由于存放空间有限，仅限入住/退房当天。"
+      },
+      "paymentMethods": {
+        "title": "支付方式",
+        "content": "Toss·PayPal（另收手续费，客房价格含VAT）、银行转账手续费0元。也可现场现金支付，需支付1万韩元押金并通过通讯软件/邮件提交航班信息和护照照片。"
+      },
+      "pending": {
+        "title": "支付待确认（PENDING）",
+        "content": "支付前客房保留1小时，未支付将自动取消。"
+      },
+      "cancellation": {
+        "title": "取消/变更政策",
+        "content": "入住前14天可免费变更/取消，14天内不可变更/取消。未入住将收取全额预订金额作为违约金。"
+      },
+      "roomFacilities": {
+        "title": "客房设施",
+        "content": "所有客房均配有独立淋浴间·空调·遮光百叶窗、电视（宿舍除外）、小冰箱·吹风机·镜子·迷你梳妆台，走廊配有净水器。"
+      },
+      "amenities": {
+        "title": "便利设施",
+        "content": "提供牙刷·牙膏·耳塞·洗发水·护发素·沐浴露·卫生纸·毛巾·衣架。"
+      },
+      "heating": {
+        "title": "供暖",
+        "content": "温突（地暖）"
+      },
+      "breakfast": {
+        "title": "早餐",
+        "content": "提供可在飞机上食用的简单零食。考虑到不同的航班时间，每天下午在各房间托盘上准备\"次日早餐\"，请只使用自己房间的托盘。"
+      },
+      "noise": {
+        "title": "噪音",
+        "content": "改造的独栋住宅，非完全隔音设施，深夜时请特别注意噪音。"
+      },
+      "toilet": {
+        "title": "厕所",
+        "content": "禁止向马桶投入异物（堵塞·损坏时可能收费）"
+      },
+      "eating": {
+        "title": "用餐",
+        "content": "可在客房内用餐，但请注意污染和气味。"
+      },
+      "children": {
+        "title": "婴幼儿/儿童",
+        "content": "可入住（不提供婴幼儿/儿童床/加床）"
+      },
+      "parkingPets": {
+        "title": "停车/宠物",
+        "content": "不可停车 / 不可携带宠物"
+      },
+      "contact": {
+        "title": "联系",
+        "content": "预订后请添加通讯软件并发送入住日期和姓名。如无法联系，将通过您输入的邮箱发送通知。"
+      }
+    }
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "close": "关闭",
+    "cancel": "取消",
+    "confirm": "确认"
+  }
+}

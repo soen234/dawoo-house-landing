@@ -1,0 +1,179 @@
+{
+  "header": {
+    "title": "Da-woo House",
+    "nav": {
+      "rooms": "Rooms",
+      "location": "Location",
+      "reviews": "Reviews",
+      "faq": "FAQ"
+    },
+    "book": "Book Now"
+  },
+  "hero": {
+    "badge": "Legal Guesthouse · License 2018-000067",
+    "title": "In the Heart of Hongdae,",
+    "subtitle": "Da-woo Guesthouse",
+    "description1": "A private guesthouse located in a quiet residential area, just 30 seconds walk from Hongdae shopping street.",
+    "description2": "All rooms have private bathrooms with showers. Comfortable bedding and basic amenities are provided, with luggage storage available on check-in/out days.",
+    "cta": {
+      "book": "Book Now",
+      "rooms": "View Rooms"
+    },
+    "stats": {
+      "rooms": "Rooms",
+      "walk": "Walk to Hongdae",
+      "station": "Hongik Univ. Station",
+      "opened": "Opened"
+    }
+  },
+  "rooms": {
+    "title": "Search Rooms",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "search": "Search",
+    "loading": "Loading rooms...",
+    "noRooms": "No rooms available.",
+    "available": "Available",
+    "price": "Price",
+    "perNight": "/night",
+    "roomsCount": "rooms",
+    "soldOut": "Sold Out",
+    "bookNow": "Book Now",
+    "unavailable": "Unavailable",
+    "capacity": "guests"
+  },
+  "booking": {
+    "title": "Room Reservation",
+    "selectRoom": "Select Room",
+    "selectRoomPlaceholder": "Please select a room",
+    "dates": "Stay Dates",
+    "nights": "nights",
+    "stay": "stay",
+    "totalNights": "Total",
+    "guestInfo": "Guest Information",
+    "name": "Name",
+    "namePlaceholder": "John Doe",
+    "email": "Email",
+    "emailPlaceholder": "example@email.com",
+    "phone": "Phone",
+    "phonePlaceholder": "+82-10-1234-5678",
+    "numberOfGuests": "Number of Guests",
+    "guestsCount": "guests",
+    "paymentMethod": "Payment Method",
+    "paymentOnsite": "Pay on Arrival",
+    "paymentOnsiteDesc": "Pay by cash or card upon check-in",
+    "paymentTransfer": "Bank Transfer",
+    "paymentTransferDesc": "Bank account details will be provided after reservation",
+    "paymentTransferInfo": "Bank Account",
+    "paymentTransferAccount": "Kookmin Bank 123-456-789012",
+    "paymentTransferName": "Account Holder: Dawoo Guesthouse",
+    "paymentTransferNote": "* Please transfer within 24 hours after reservation",
+    "paymentPaypal": "PayPal",
+    "paymentPaypalDesc": "PayPal link will be sent to your email after reservation",
+    "paymentPaypalAccount": "PayPal Account: dawoohouse@paypal.com",
+    "paymentPaypalNote": "* Please enter your email address to receive the payment link",
+    "summary": "Reservation Summary",
+    "room": "Room",
+    "period": "Stay Period",
+    "guests": "Guests",
+    "totalPrice": "Total Price",
+    "submitting": "Booking...",
+    "submit": "Book Now",
+    "required": "*"
+  },
+  "location": {
+    "title": "Location",
+    "entrancePhoto": "Entrance Photo",
+    "addressLabel": "Address:",
+    "address": "12, Wausan-ro 29na-gil, Mapo-gu, Seoul (Da-woo House 1)",
+    "subway": "5 min walk from Hongik Univ. Station Exit 6",
+    "directions": "Exit from Hongik Univ. Station Exit 6, search for 'Tomoto Curry' on the map. Enter the alley between the buildings where 'Tomoto Curry' and 'TARRTARR' are located.",
+    "parkingWarning": "Parking is not available. Public transportation is recommended.",
+    "mapTitle": "Map"
+  },
+  "faq": {
+    "title": "FAQ / Guest Information",
+    "subtitle": "Essential information for your stay at Da-woo House.",
+    "categories": {
+      "checkinout": "Check-in/Check-out",
+      "payment": "Payment/Booking",
+      "facilities": "Room Facilities",
+      "services": "Services",
+      "rules": "House Rules",
+      "other": "Other"
+    },
+    "items": {
+      "checkinTime": {
+        "title": "Check-in/Check-out Time",
+        "content": "Check-in 15:00 / Check-out 11:00, no curfew."
+      },
+      "checkinMethod": {
+        "title": "Check-in/Access Method",
+        "content": "Access available with password provided before check-in."
+      },
+      "luggage": {
+        "title": "Luggage Storage",
+        "content": "Limited storage space, available only on check-in/out days."
+      },
+      "paymentMethods": {
+        "title": "Payment Methods",
+        "content": "Toss·PayPal (separate processing fee, room rate includes VAT), bank transfer with zero fee. On-site cash payment is also available, requiring a 10,000 KRW deposit and submission of flight information and passport photo via messenger/email."
+      },
+      "pending": {
+        "title": "Payment Pending",
+        "content": "Room reservation is held for 1 hour before payment, automatically cancelled if unpaid."
+      },
+      "cancellation": {
+        "title": "Cancellation/Change Policy",
+        "content": "Free cancellation/change until 14 days before check-in, no cancellation/change within 14 days. Full amount charged as penalty for no-shows."
+      },
+      "roomFacilities": {
+        "title": "Room Facilities",
+        "content": "All rooms have private shower·air conditioning·blackout blinds, TV (except dormitory), mini fridge·hairdryer·mirror·mini vanity, and water purifier in the hallway."
+      },
+      "amenities": {
+        "title": "Amenities",
+        "content": "Toothbrush·toothpaste·earplugs·shampoo·conditioner·body wash·toilet paper·towels·hangers provided."
+      },
+      "heating": {
+        "title": "Heating",
+        "content": "Ondol (floor heating)"
+      },
+      "breakfast": {
+        "title": "Breakfast",
+        "content": "Simple snacks suitable for in-flight consumption. Considering various flight times, 'next day breakfast' is set on each room tray every afternoon. Please use only your room's tray."
+      },
+      "noise": {
+        "title": "Noise",
+        "content": "Converted house, not completely soundproof. Please be especially mindful of noise late at night."
+      },
+      "toilet": {
+        "title": "Toilet",
+        "content": "No foreign objects in toilet (charges may apply for blockage/damage)."
+      },
+      "eating": {
+        "title": "Eating in Room",
+        "content": "Eating in room allowed, but please be mindful of stains and odors."
+      },
+      "children": {
+        "title": "Infants/Children",
+        "content": "Allowed (infant/children beds/extra beds not available)."
+      },
+      "parkingPets": {
+        "title": "Parking/Pets",
+        "content": "No parking / No pets allowed"
+      },
+      "contact": {
+        "title": "Contact",
+        "content": "After booking, please add our messenger and send check-in date and name. If unable to reach, we will guide via your email."
+      }
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "close": "Close",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "header": {
+    "title": "Da-woo House",
+    "nav": {
+      "rooms": "客室",
+      "location": "アクセス",
+      "reviews": "レビュー",
+      "faq": "よくある質問"
+    },
+    "book": "予約する"
+  },
+  "hero": {
+    "badge": "合法ゲストハウス · 許可番号 2018-000067",
+    "title": "ホンデの中心、",
+    "subtitle": "ダウゲストハウス",
+    "description1": "ホンデのショッピング街まで徒歩30秒、静かな住宅街にあるプライベートゲストハウスです。",
+    "description2": "全室にシャワー付き専用バスルームがあります。快適な寝具、基本的なアメニティが提供され、チェックイン/アウト当日は荷物の保管が可能です。",
+    "cta": {
+      "book": "今すぐ予約",
+      "rooms": "客室を見る"
+    },
+    "stats": {
+      "rooms": "客室",
+      "walk": "ホンデまで徒歩",
+      "station": "ホンデ入口駅",
+      "opened": "オープン"
+    }
+  },
+  "rooms": {
+    "title": "客室検索",
+    "checkIn": "チェックイン",
+    "checkOut": "チェックアウト",
+    "search": "検索",
+    "loading": "客室情報を読み込み中...",
+    "noRooms": "表示する客室がありません。",
+    "available": "予約可能",
+    "price": "料金",
+    "perNight": "/泊",
+    "roomsCount": "室",
+    "soldOut": "満室",
+    "bookNow": "予約する",
+    "unavailable": "予約不可",
+    "capacity": "名"
+  },
+  "booking": {
+    "title": "客室予約",
+    "selectRoom": "客室選択",
+    "selectRoomPlaceholder": "客室を選択してください",
+    "dates": "宿泊日",
+    "nights": "泊",
+    "stay": "宿泊",
+    "totalNights": "合計",
+    "guestInfo": "宿泊者情報",
+    "name": "氏名",
+    "namePlaceholder": "山田太郎",
+    "email": "メールアドレス",
+    "emailPlaceholder": "example@email.com",
+    "phone": "電話番号",
+    "phonePlaceholder": "+82-10-1234-5678",
+    "numberOfGuests": "宿泊人数",
+    "guestsCount": "名",
+    "paymentMethod": "お支払い方法",
+    "paymentOnsite": "現地決済",
+    "paymentOnsiteDesc": "チェックイン時に現金またはカードでお支払い",
+    "paymentTransfer": "銀行振込",
+    "paymentTransferDesc": "予約後に口座番号をご案内します",
+    "paymentTransferInfo": "振込口座",
+    "paymentTransferAccount": "国民銀行 123-456-789012",
+    "paymentTransferName": "口座名義: ダウゲストハウス",
+    "paymentTransferNote": "* 予約後24時間以内にお振込みください",
+    "paymentPaypal": "PayPal",
+    "paymentPaypalDesc": "予約後にPayPalリンクをメールでお送りします",
+    "paymentPaypalAccount": "PayPalアカウント: dawoohouse@paypal.com",
+    "paymentPaypalNote": "* 決済リンクをメールで受け取るにはメールアドレスを入力してください",
+    "summary": "予約概要",
+    "room": "客室",
+    "period": "宿泊期間",
+    "guests": "宿泊人数",
+    "totalPrice": "合計金額",
+    "submitting": "予約中...",
+    "submit": "予約する",
+    "required": "*"
+  },
+  "location": {
+    "title": "アクセス",
+    "entrancePhoto": "正門（入口）写真",
+    "addressLabel": "住所：",
+    "address": "ソウル特別市麻浦区ワウサンロ29ナギル12（ダウハウス1）",
+    "subway": "ホンデ入口駅6番出口から徒歩5分",
+    "directions": "ホンデ入口駅6番出口を出た後、地図で「トモトカレー」を検索してください。「トモトカレー」と「TARRTARR」がある建物の間の路地に入ると宿泊施設があります。",
+    "parkingWarning": "駐車はできません。公共交通機関のご利用をお勧めします。",
+    "mapTitle": "地図"
+  },
+  "faq": {
+    "title": "よくある質問 / ご利用案内",
+    "subtitle": "ダウハウスのご利用に必要な情報をご確認ください。",
+    "categories": {
+      "checkinout": "チェックイン/チェックアウト",
+      "payment": "お支払い/予約",
+      "facilities": "客室設備",
+      "services": "サービス",
+      "rules": "ご利用規則",
+      "other": "その他"
+    },
+    "items": {
+      "checkinTime": {
+        "title": "チェックイン/チェックアウト時間",
+        "content": "チェックイン15:00 / チェックアウト11:00、門限はありません。"
+      },
+      "checkinMethod": {
+        "title": "チェックイン/入室方法",
+        "content": "チェックイン前にご案内する暗証番号で入室できます。"
+      },
+      "luggage": {
+        "title": "荷物保管",
+        "content": "保管スペースが限られているため、チェックイン/アウト当日のみ可能です。"
+      },
+      "paymentMethods": {
+        "title": "お支払い方法",
+        "content": "Toss・PayPal（決済手数料別途、客室料金はVAT込み）、銀行振込手数料0円。現地現金決済も可能で、その場合は1万ウォンの保証金決済とフライト情報・パスポート写真をメッセンジャー/メールで提出してください。"
+      },
+      "pending": {
+        "title": "お支払い待ち（PENDING）",
+        "content": "決済前の客室確保は1時間維持され、未決済の場合は自動キャンセルされます。"
+      },
+      "cancellation": {
+        "title": "キャンセル/変更ポリシー",
+        "content": "チェックイン14日前まで無料変更/キャンセル可能、14日以内は変更/キャンセル不可。ノーショーの場合、予約金額全額が違約金として請求されます。"
+      },
+      "roomFacilities": {
+        "title": "客室設備",
+        "content": "全室に専用シャワー室・エアコン・遮光ブラインド、TV（ドミトリー除く）、小型冷蔵庫・ドライヤー・鏡・ミニドレッサーがあり、廊下には浄水器が設置されています。"
+      },
+      "amenities": {
+        "title": "アメニティ",
+        "content": "歯ブラシ・歯磨き粉・耳栓・シャンプー・リンス・ボディソープ・トイレットペーパー・タオル・ハンガーが提供されます。"
+      },
+      "heating": {
+        "title": "暖房",
+        "content": "オンドル（床暖房）"
+      },
+      "breakfast": {
+        "title": "朝食",
+        "content": "機内でも召し上がれる簡単なスナックを提供しています。様々なフライト時間を考慮し、毎日午後に「翌日の朝食」を各部屋のトレイにセットしますので、ご自分の部屋のトレイのみご利用ください。"
+      },
+      "noise": {
+        "title": "騒音",
+        "content": "一軒家を改造した宿泊施設で完全防音設備ではないため、夜遅い時間は特に騒音にご注意ください。"
+      },
+      "toilet": {
+        "title": "トイレ",
+        "content": "便器への異物投入禁止（詰まり・破損時は費用請求の可能性あり）"
+      },
+      "eating": {
+        "title": "客室内での飲食",
+        "content": "客室内での飲食可能ですが、汚れ・においにご注意ください。"
+      },
+      "children": {
+        "title": "乳幼児/お子様",
+        "content": "宿泊可能（乳幼児・お子様用ベッド/エキストラベッドの提供は不可）"
+      },
+      "parkingPets": {
+        "title": "駐車/ペット",
+        "content": "駐車不可 / ペット同伴不可"
+      },
+      "contact": {
+        "title": "連絡",
+        "content": "予約後、メッセンジャーを追加してチェックイン日とお名前をお送りください。連絡が難しい場合はご入力いただいたメールアドレスにご案内します。"
+      }
+    }
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "close": "閉じる",
+    "cancel": "キャンセル",
+    "confirm": "確認"
+  }
+}
