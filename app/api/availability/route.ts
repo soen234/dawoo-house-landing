@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { checkRoomAvailability, calculateTotalPrice } from '@/lib/availability';
+import { checkRoomAvailability, calculateTotalPrice, getDailyPrices } from '@/lib/availability';
 
 export async function GET(request: Request) {
   try {
@@ -17,6 +17,7 @@ export async function GET(request: Request) {
 
     const available = await checkRoomAvailability(roomId, checkIn, checkOut);
     const totalPrice = await calculateTotalPrice(roomId, checkIn, checkOut);
+    const dailyPrices = await getDailyPrices(roomId, checkIn, checkOut);
 
     return NextResponse.json({
       roomId,
@@ -24,6 +25,7 @@ export async function GET(request: Request) {
       checkOut,
       available,
       totalPrice,
+      dailyPrices,
       isAvailable: available > 0,
     });
   } catch (error) {

@@ -6,12 +6,14 @@ interface DateRangePickerProps {
   startDate?: string;
   endDate?: string;
   onDateChange: (startDate: string, endDate: string) => void;
+  dailyPrices?: { date: string; price: number }[];
 }
 
 export default function DateRangePicker({
   startDate: initialStartDate = '',
   endDate: initialEndDate = '',
   onDateChange,
+  dailyPrices = [],
 }: DateRangePickerProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [startDate, setStartDate] = useState(initialStartDate);
@@ -112,6 +114,11 @@ export default function DateRangePicker({
     return date === startDate || date === endDate;
   };
 
+  const getPriceForDate = (date: string): number | null => {
+    const priceInfo = dailyPrices.find(p => p.date === date);
+    return priceInfo ? priceInfo.price : null;
+  };
+
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-6">
       {/* Calendar Header */}
@@ -208,24 +215,31 @@ export default function DateRangePicker({
           const disabled = day.isPast;
           const dayOfWeek = index % 7;
 
+          const price = getPriceForDate(day.date);
+
           return (
             <button
               key={day.date}
               onClick={() => handleDateClick(day.date)}
               disabled={disabled}
               className={`
-                aspect-square p-2 text-sm rounded-lg transition-all relative
-                ${!day.isCurrentMonth ? 'text-gray-300' : ''}
+                p-1 text-xs rounded-lg transition-all relative font-semibold flex flex-col items-center justify-center min-h-[60px]
+                ${!day.isCurrentMonth ? 'text-gray-400 font-normal' : 'text-gray-900'}
                 ${day.isToday ? 'ring-2 ring-green-500' : ''}
                 ${selected ? 'bg-green-600 text-white font-bold' : ''}
-                ${inRange && !selected ? 'bg-green-100 text-green-800' : ''}
+                ${inRange && !selected ? 'bg-green-100 text-green-900 font-bold' : ''}
                 ${!selected && !inRange && !disabled && day.isCurrentMonth ? 'hover:bg-gray-100' : ''}
                 ${disabled ? 'cursor-not-allowed opacity-40 line-through' : 'cursor-pointer'}
                 ${dayOfWeek === 0 && day.isCurrentMonth && !selected && !inRange ? 'text-red-600' : ''}
                 ${dayOfWeek === 6 && day.isCurrentMonth && !selected && !inRange ? 'text-blue-600' : ''}
               `}
             >
-              {new Date(day.date).getDate()}
+              <span className="text-base font-bold">{new Date(day.date).getDate()}</span>
+              {price && day.isCurrentMonth && !disabled && (
+                <span className={`text-[10px] mt-0.5 ${selected ? 'text-white' : 'text-gray-600'}`}>
+                  ₩{(price / 1000).toFixed(0)}k
+                </span>
+              )}
             </button>
           );
         })}

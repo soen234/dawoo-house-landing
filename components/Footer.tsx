@@ -1,6 +1,11 @@
+'use client';
+
 import Link from 'next/link';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -9,42 +14,42 @@ export default function Footer() {
           <div>
             <h3 className="text-white text-xl font-bold mb-4">Da-woo House</h3>
             <p className="text-sm text-gray-400 mb-4">
-              홍대입구역 도보 5분<br />
-              합법 게스트하우스
+              {t.footer.subtitle}<br />
+              {t.footer.legal}
             </p>
             <p className="text-xs text-gray-500">
-              사업자등록번호: 575-34-00493<br />
-              지자체 인·허가번호: 2018-000067
+              {t.footer.businessNumber} 575-34-00493<br />
+              {t.footer.licenseNumber} 2018-000067
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-semibold mb-4">빠른 링크</h4>
+            <h4 className="text-white font-semibold mb-4">{t.footer.quickLinks}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/rooms" className="hover:text-white transition-colors">
-                  객실 안내
+                  {t.footer.roomsLink}
                 </Link>
               </li>
               <li>
                 <Link href="/location" className="hover:text-white transition-colors">
-                  오시는 길
+                  {t.footer.locationLink}
                 </Link>
               </li>
               <li>
                 <Link href="/reviews" className="hover:text-white transition-colors">
-                  후기
+                  {t.footer.reviewsLink}
                 </Link>
               </li>
               <li>
                 <Link href="/faq" className="hover:text-white transition-colors">
-                  자주 묻는 질문
+                  {t.footer.faqLink}
                 </Link>
               </li>
               <li>
                 <Link href="/book" className="hover:text-white transition-colors">
-                  예약하기
+                  {t.footer.bookLink}
                 </Link>
               </li>
             </ul>
@@ -52,7 +57,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-white font-semibold mb-4">연락처</h4>
+            <h4 className="text-white font-semibold mb-4">{t.footer.contactTitle}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <a href="mailto:dawoohongdae@gmail.com" className="hover:text-white transition-colors">
@@ -75,7 +80,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Da-woo House. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Da-woo House. {t.footer.copyright}</p>
         </div>
       </div>
     </footer>

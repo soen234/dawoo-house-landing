@@ -1,4 +1,10 @@
+'use client';
+
+import { useLanguage } from '@/lib/i18n/LanguageContext';
+
 export default function Contact() {
+  const { t } = useLanguage();
+
   const contacts = [
     {
       name: 'LINE',
@@ -19,10 +25,10 @@ export default function Contact() {
       type: 'ID'
     },
     {
-      name: '위챗',
+      name: 'WeChat',
       id: 'dawoohouse1',
       qr: '/qr/wechat_dawoohouse1.png',
-      type: '위챗 ID'
+      type: t.contact.wechatID
     }
   ];
 
@@ -31,12 +37,10 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            연락 방법
+            {t.contact.title}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            객실 준비나 손님 응대로 전화 연결이 어려운 경우가 많습니다.
-            <br />
-            메신저 또는 이메일로 연락 부탁드립니다.
+            {t.contact.description}
           </p>
         </div>
 
@@ -59,7 +63,7 @@ export default function Contact() {
                     className="w-40 h-40 object-contain"
                   />
                 </div>
-                <p className="text-xs text-gray-500 mt-2">QR 코드로 추가</p>
+                <p className="text-xs text-gray-500 mt-2">{t.contact.qrText}</p>
               </div>
             </div>
           ))}
@@ -69,7 +73,7 @@ export default function Contact() {
         <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-8">
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">이메일</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{t.contact.email}</h3>
               <a
                 href="mailto:dawoohongdae@gmail.com"
                 className="text-lg text-green-600 hover:text-green-700 font-medium"
@@ -78,7 +82,7 @@ export default function Contact() {
               </a>
             </div>
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">전화번호</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{t.contact.phone}</h3>
               <a
                 href="tel:+821086766858"
                 className="text-lg text-green-600 hover:text-green-700 font-medium"
@@ -86,7 +90,7 @@ export default function Contact() {
                 +82 10 8676 6858
               </a>
               <p className="text-sm text-red-600 mt-2">
-                ⚠️ 전화는 연결이 지연될 수 있습니다. 긴급하지 않다면 메신저/이메일을 이용해 주세요.
+                {t.contact.phoneWarning}
               </p>
             </div>
           </div>

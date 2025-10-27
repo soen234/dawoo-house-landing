@@ -42,6 +42,43 @@
     "unavailable": "Unavailable",
     "capacity": "guests"
   },
+  "roomTypes": {
+    "single": "Single Room",
+    "double": "Double Room",
+    "triple": "Triple Room",
+    "quad": "Quad Room",
+    "dormitory": "Female Dormitory Bed"
+  },
+  "roomDetails": {
+    "single": {
+      "size": "10㎡",
+      "beds": "1 Double Bed",
+      "description": "Cozy private space for one. 10㎡ with 1 double bed."
+    },
+    "double": {
+      "size": "13㎡",
+      "beds": "1 Double Bed",
+      "description": "Perfect for 1-2 guests. 13㎡ with 1 double bed."
+    },
+    "triple": {
+      "size": "16㎡",
+      "beds": "1 Super Single + 1 Double",
+      "description": "Great value for 3 people. 1 super single + 1 double bed."
+    },
+    "quad": {
+      "size": "19㎡",
+      "beds": "2 Double + 1 Super Single",
+      "description": "Ideal for families/groups. 2 double + 1 super single bed."
+    },
+    "dormitory": {
+      "size": "40㎡",
+      "beds": "5 Super Single Beds",
+      "description": "Female-only 5-bed dormitory with spacious common area."
+    },
+    "sizeLabel": "Size:",
+    "bedsLabel": "Beds:",
+    "viewDetails": "View Details"
+  },
   "booking": {
     "title": "Room Reservation",
     "selectRoom": "Select Room",
@@ -168,6 +205,62 @@
         "content": "After booking, please add our messenger and send check-in date and name. If unable to reach, we will guide via your email."
       }
     }
+  },
+  "about": {
+    "title": "Our Story",
+    "story1": "We opened our guesthouse in 2018 with 11 rooms,",
+    "story1Bold": "Da-woo House means many friends",
+    "story1End": ". The name reflects our belief that 'guests are friends and this space exists thanks to many friends.'",
+    "safestay": "This accommodation participates in the",
+    "safestayBold": "Safestay Campaign",
+    "safestayEnd": " and is a legal lodging facility.",
+    "businessNumber": "Business Registration No:",
+    "licenseNumber": "License No:",
+    "goal": "Da-woo Guesthouse aims to be the",
+    "goalBold": "most beloved guesthouse in Hongdae",
+    "goalEnd": ". All locations have convenient access to AREX and are ideally situated to enjoy Hongdae, Yeonnam-dong, and Seogyo-dong.",
+    "facilities": "We use hotel-grade bedding and eco-friendly interiors, with professional cleaning staff maintaining all rooms in pristine condition. We also provide personalized 1:1 service for true relaxation.",
+    "mission": "We will grow into a truly 'Hongdae-like' guesthouse that presents differentiated value through endless creativity and challenge."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Phone connection may be difficult due to room preparation or guest service. Please contact us via messenger or email.",
+    "qrText": "Scan QR code",
+    "email": "Email",
+    "phone": "Phone",
+    "phoneWarning": "⚠️ Phone connection may be delayed. Please use messenger/email if not urgent.",
+    "wechatID": "WeChat ID"
+  },
+  "reviews": {
+    "title": "Guest Reviews",
+    "subtitle": "See what guests say about Da-woo House",
+    "overall": "Overall Rating",
+    "reviewsCount": "reviews",
+    "staff": "Staff",
+    "cleanliness": "Cleanliness",
+    "location": "Location",
+    "facilities": "Facilities",
+    "comfort": "Comfort",
+    "value": "Value",
+    "wifi": "Wi-Fi",
+    "translated": "Translated",
+    "originalText": "View Original",
+    "reply": "Reply",
+    "newBadge": "New!"
+  },
+  "footer": {
+    "subtitle": "5 min walk from Hongik Univ. Station",
+    "legal": "Legal Guesthouse",
+    "businessNumber": "Business Registration No:",
+    "licenseNumber": "License No:",
+    "quickLinks": "Quick Links",
+    "roomsLink": "Rooms",
+    "locationLink": "Location",
+    "reviewsLink": "Reviews",
+    "faqLink": "FAQ",
+    "bookLink": "Book Now",
+    "contactTitle": "Contact",
+    "copyright": "All rights reserved."
   },
   "common": {
     "loading": "Loading...",

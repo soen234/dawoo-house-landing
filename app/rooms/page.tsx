@@ -8,26 +8,42 @@ import { type RoomWithAvailability } from '@/lib/supabase';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 // 객실 타입에 따른 이미지 매핑
-const getRoomImage = (roomType: string): string => {
-  const typeMap: { [key: string]: string } = {
+const getRoomImage = (roomName: string, roomType: string): string => {
+  // roomName으로 먼저 매핑 시도
+  const nameMap: { [key: string]: string } = {
     '1인실': '/room_images/room_single/161837298.jpg',
-    'single': '/room_images/room_single/161837298.jpg',
-    '싱글': '/room_images/room_single/161837298.jpg',
     '2인실': '/room_images/room_double/162068666.jpg',
-    'double': '/room_images/room_double/162068666.jpg',
-    '더블': '/room_images/room_double/162068666.jpg',
     '3인실': '/room_images/room_triple/161837267.jpg',
-    'triple': '/room_images/room_triple/161837267.jpg',
-    '트리플': '/room_images/room_triple/161837267.jpg',
     '4인실': '/room_images/room_quad/161837333.jpg',
-    'quad': '/room_images/room_quad/161837333.jpg',
-    '쿼드': '/room_images/room_quad/161837333.jpg',
     '도미토리': '/room_images/room_dormitory/161837398.jpg',
-    'dormitory': '/room_images/room_dormitory/161837398.jpg',
-    'dorm': '/room_images/room_dormitory/161837398.jpg',
   };
 
-  return typeMap[roomType.toLowerCase()] || '/room_images/room_single/161837298.jpg';
+  // roomType으로 매핑
+  const typeMap: { [key: string]: string } = {
+    'single': '/room_images/room_single/161837298.jpg',
+    'double': '/room_images/room_double/162068666.jpg',
+    'triple': '/room_images/room_triple/161837267.jpg',
+    'quad': '/room_images/room_quad/161837333.jpg',
+    'dormitory': '/room_images/room_dormitory/161837398.jpg',
+  };
+
+  // roomName에서 키워드를 찾아서 매핑
+  const lowerName = roomName.toLowerCase();
+  if (lowerName.includes('1인') || lowerName.includes('single') || lowerName.includes('싱글')) {
+    return '/room_images/room_single/161837298.jpg';
+  } else if (lowerName.includes('2인') || lowerName.includes('double') || lowerName.includes('더블')) {
+    return '/room_images/room_double/162068666.jpg';
+  } else if (lowerName.includes('3인') || lowerName.includes('triple') || lowerName.includes('트리플')) {
+    return '/room_images/room_triple/161837267.jpg';
+  } else if (lowerName.includes('4인') || lowerName.includes('quad') || lowerName.includes('쿼드')) {
+    return '/room_images/room_quad/161837333.jpg';
+  } else if (lowerName.includes('도미') || lowerName.includes('dorm')) {
+    return '/room_images/room_dormitory/161837398.jpg';
+  }
+
+  // roomType으로 시도
+  const lowerType = roomType.toLowerCase();
+  return typeMap[lowerType] || '/room_images/room_single/161837298.jpg';
 };
 
 export default function RoomsPage() {
@@ -71,6 +87,91 @@ export default function RoomsPage() {
     if (checkIn && checkOut) {
       fetchRooms(checkIn, checkOut);
     }
+  };
+
+  const getRoomTypeName = (type: string, name?: string) => {
+    // Normalize type to lowercase
+    let normalizedType = type?.toLowerCase() || '';
+
+    // If type is not standard, try to infer from name
+    if (!normalizedType || !['single', 'double', 'triple', 'quad', 'dormitory'].includes(normalizedType)) {
+      const lowerName = (name || '').toLowerCase();
+      if (lowerName.includes('single') || lowerName.includes('1인') || lowerName.includes('싱글')) {
+        normalizedType = 'single';
+      } else if (lowerName.includes('double') || lowerName.includes('2인') || lowerName.includes('더블')) {
+        normalizedType = 'double';
+      } else if (lowerName.includes('triple') || lowerName.includes('3인') || lowerName.includes('트리플')) {
+        normalizedType = 'triple';
+      } else if (lowerName.includes('quad') || lowerName.includes('4인') || lowerName.includes('쿼드')) {
+        normalizedType = 'quad';
+      } else if (lowerName.includes('dorm') || lowerName.includes('도미')) {
+        normalizedType = 'dormitory';
+      }
+    }
+
+    const typeKey = normalizedType as 'single' | 'double' | 'triple' | 'quad' | 'dormitory';
+    return t.roomTypes?.[typeKey] || name || type;
+  };
+
+  const getRoomCapacity = (type: string, name?: string, dbCapacity?: number) => {
+    // Normalize type to lowercase
+    let normalizedType = type?.toLowerCase() || '';
+
+    // If type is not standard, try to infer from name
+    if (!normalizedType || !['single', 'double', 'triple', 'quad', 'dormitory'].includes(normalizedType)) {
+      const lowerName = (name || '').toLowerCase();
+      if (lowerName.includes('single') || lowerName.includes('1인') || lowerName.includes('싱글')) {
+        normalizedType = 'single';
+      } else if (lowerName.includes('double') || lowerName.includes('2인') || lowerName.includes('더블')) {
+        normalizedType = 'double';
+      } else if (lowerName.includes('triple') || lowerName.includes('3인') || lowerName.includes('트리플')) {
+        normalizedType = 'triple';
+      } else if (lowerName.includes('quad') || lowerName.includes('4인') || lowerName.includes('쿼드')) {
+        normalizedType = 'quad';
+      } else if (lowerName.includes('dorm') || lowerName.includes('도미')) {
+        normalizedType = 'dormitory';
+      }
+    }
+
+    // Return capacity based on room type
+    switch (normalizedType) {
+      case 'single':
+        return 1;
+      case 'dormitory':
+        return 1;
+      case 'double':
+        return 2;
+      case 'triple':
+        return 3;
+      case 'quad':
+        return 4;
+      default:
+        return dbCapacity || 2; // fallback to DB value or 2
+    }
+  };
+
+  const getNormalizedType = (type: string, name?: string): 'single' | 'double' | 'triple' | 'quad' | 'dormitory' | null => {
+    let normalizedType = type?.toLowerCase() || '';
+
+    if (!normalizedType || !['single', 'double', 'triple', 'quad', 'dormitory'].includes(normalizedType)) {
+      const lowerName = (name || '').toLowerCase();
+      if (lowerName.includes('single') || lowerName.includes('1인') || lowerName.includes('싱글')) {
+        normalizedType = 'single';
+      } else if (lowerName.includes('double') || lowerName.includes('2인') || lowerName.includes('더블')) {
+        normalizedType = 'double';
+      } else if (lowerName.includes('triple') || lowerName.includes('3인') || lowerName.includes('트리플')) {
+        normalizedType = 'triple';
+      } else if (lowerName.includes('quad') || lowerName.includes('4인') || lowerName.includes('쿼드')) {
+        normalizedType = 'quad';
+      } else if (lowerName.includes('dorm') || lowerName.includes('도미')) {
+        normalizedType = 'dormitory';
+      }
+    }
+
+    if (['single', 'double', 'triple', 'quad', 'dormitory'].includes(normalizedType)) {
+      return normalizedType as 'single' | 'double' | 'triple' | 'quad' | 'dormitory';
+    }
+    return null;
   };
 
   return (
@@ -148,18 +249,40 @@ export default function RoomsPage() {
                 >
                   <div className="relative h-48 bg-gray-100">
                     <img
-                      src={getRoomImage(room.type)}
+                      src={getRoomImage(room.name, room.type)}
                       alt={room.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {room.name}
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                      {getRoomTypeName(room.type, room.name)}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-4">
-                      {room.type} · {room.capacity}{t.rooms.capacity}
-                    </p>
+
+                    {/* Room Details */}
+                    {(() => {
+                      const normalizedType = getNormalizedType(room.type, room.name);
+                      const details = normalizedType ? t.roomDetails?.[normalizedType] : null;
+
+                      return details ? (
+                        <div className="space-y-2 mb-4 text-sm">
+                          <div className="flex items-center text-gray-700">
+                            <span className="font-semibold mr-2">{t.roomDetails.sizeLabel}</span>
+                            <span>{details.size}</span>
+                            <span className="mx-2">|</span>
+                            <span className="font-semibold mr-2">{t.roomDetails.bedsLabel}</span>
+                            <span>{details.beds}</span>
+                          </div>
+                          <p className="text-gray-600 leading-relaxed">
+                            {details.description}
+                          </p>
+                        </div>
+                      ) : (
+                        <p className="text-sm text-gray-600 mb-4">
+                          {getRoomCapacity(room.type, room.name, room.capacity)}{t.rooms.capacity}
+                        </p>
+                      );
+                    })()}
 
                     <div className="space-y-2 mb-4">
                       {room.available_count !== undefined && (
@@ -174,30 +297,39 @@ export default function RoomsPage() {
                           </span>
                         </div>
                       )}
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-600">{t.rooms.price}</span>
-                        <span className="text-lg font-bold text-gray-900">
-                          ₩{(room.current_price || room.base_price).toLocaleString()}
-                          <span className="text-sm font-normal text-gray-600">{t.rooms.perNight}</span>
-                        </span>
-                      </div>
                     </div>
 
-                    {room.available_count === 0 ? (
-                      <button
-                        disabled
-                        className="w-full py-3 bg-gray-300 text-gray-600 font-semibold rounded-lg cursor-not-allowed"
-                      >
-                        {t.rooms.unavailable}
-                      </button>
-                    ) : (
-                      <Link
-                        href={`/book?room_id=${room.id}${checkIn ? `&check_in=${checkIn}` : ''}${checkOut ? `&check_out=${checkOut}` : ''}`}
-                        className="block w-full py-3 bg-green-600 text-white text-center font-semibold rounded-lg hover:bg-green-700 transition-colors"
-                      >
-                        {t.rooms.bookNow}
-                      </Link>
-                    )}
+                    <div className="space-y-2">
+                      {/* View Details Button */}
+                      {(() => {
+                        const normalizedType = getNormalizedType(room.type, room.name);
+                        return normalizedType && t.roomDetails?.[normalizedType] ? (
+                          <Link
+                            href={`/book?room_id=${room.id}${checkIn ? `&check_in=${checkIn}` : ''}${checkOut ? `&check_out=${checkOut}` : ''}`}
+                            className="block w-full py-2 text-center text-green-600 font-semibold hover:text-green-700 transition-colors"
+                          >
+                            {t.roomDetails.viewDetails} →
+                          </Link>
+                        ) : null;
+                      })()}
+
+                      {/* Book Now Button */}
+                      {room.available_count === 0 ? (
+                        <button
+                          disabled
+                          className="w-full py-3 bg-gray-300 text-gray-600 font-semibold rounded-lg cursor-not-allowed"
+                        >
+                          {t.rooms.unavailable}
+                        </button>
+                      ) : (
+                        <Link
+                          href={`/book?room_id=${room.id}${checkIn ? `&check_in=${checkIn}` : ''}${checkOut ? `&check_out=${checkOut}` : ''}`}
+                          className="block w-full py-3 bg-green-600 text-white text-center font-semibold rounded-lg hover:bg-green-700 transition-colors"
+                        >
+                          {t.rooms.bookNow}
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))

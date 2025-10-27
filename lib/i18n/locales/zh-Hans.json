@@ -42,6 +42,43 @@
     "unavailable": "不可预订",
     "capacity": "人"
   },
+  "roomTypes": {
+    "single": "单人间",
+    "double": "双人间",
+    "triple": "三人间",
+    "quad": "四人间",
+    "dormitory": "女性专用多人间床位"
+  },
+  "roomDetails": {
+    "single": {
+      "size": "10㎡",
+      "beds": "双人床1张",
+      "description": "紧凑的1人专用空间。10㎡，双人床1张。"
+    },
+    "double": {
+      "size": "13㎡",
+      "beds": "双人床1张",
+      "description": "适合1~2人的基本型。13㎡，双人床1张。"
+    },
+    "triple": {
+      "size": "16㎡",
+      "beds": "超单人床1张 + 双人床1张",
+      "description": "3人经济型。超单人床1张 + 双人床1张。"
+    },
+    "quad": {
+      "size": "19㎡",
+      "beds": "双人床2张 + 超单人床1张",
+      "description": "适合家庭/团体。双人床2张 + 超单人床1张。"
+    },
+    "dormitory": {
+      "size": "40㎡",
+      "beds": "超单人床5张",
+      "description": "女性专用5床位多人间。宽敞的公共空间。"
+    },
+    "sizeLabel": "面积:",
+    "bedsLabel": "床位:",
+    "viewDetails": "查看详情"
+  },
   "booking": {
     "title": "客房预订",
     "selectRoom": "选择客房",
@@ -168,6 +205,62 @@
         "content": "预订后请添加通讯软件并发送入住日期和姓名。如无法联系，将通过您输入的邮箱发送通知。"
       }
     }
+  },
+  "about": {
+    "title": "达宇民宿的故事",
+    "story1": "我们的民宿于2018年以11间客房开业，",
+    "story1Bold": "达宇民宿意味着许多朋友",
+    "story1End": "。这个名字反映了我们的想法：「客人是朋友，正是因为有许多朋友，这个空间才得以存在」。",
+    "safestay": "本住宿参与",
+    "safestayBold": "Safestay活动",
+    "safestayEnd": "，是合法住宿设施。",
+    "businessNumber": "营业执照号:",
+    "licenseNumber": "许可证号:",
+    "goal": "达宇民宿的目标是成为",
+    "goalBold": "弘大最受欢迎的民宿",
+    "goalEnd": "。所有分店都可方便使用机场铁路AREX，是享受弘大·延南洞·西桥洞的最佳位置。",
+    "facilities": "我们使用酒店级床上用品和环保内饰，专业清洁人员始终保持所有客房整洁舒适。此外，我们提供1对1定制服务，为您带来真正的休息。",
+    "mission": "我们将通过不断的创意和挑战，成长为提供差异化价值的「弘大风格」民宿。"
+  },
+  "contact": {
+    "title": "联系方式",
+    "description": "由于客房准备或接待客人，电话可能难以接通。请通过通讯软件或邮件联系。",
+    "qrText": "扫描二维码添加",
+    "email": "邮箱",
+    "phone": "电话",
+    "phoneWarning": "⚠️ 电话可能延迟接通。如非紧急情况，请使用通讯软件/邮件。",
+    "wechatID": "微信ID"
+  },
+  "reviews": {
+    "title": "客人评价",
+    "subtitle": "查看客人在达宇民宿的体验",
+    "overall": "总体评分",
+    "reviewsCount": "条评价",
+    "staff": "员工",
+    "cleanliness": "清洁度",
+    "location": "位置",
+    "facilities": "设施",
+    "comfort": "舒适度",
+    "value": "性价比",
+    "wifi": "Wi-Fi",
+    "translated": "已翻译",
+    "originalText": "查看原文",
+    "reply": "回复",
+    "newBadge": "新!"
+  },
+  "footer": {
+    "subtitle": "弘大入口站步行5分钟",
+    "legal": "合法民宿",
+    "businessNumber": "营业执照号:",
+    "licenseNumber": "许可证号:",
+    "quickLinks": "快速链接",
+    "roomsLink": "客房介绍",
+    "locationLink": "位置",
+    "reviewsLink": "评价",
+    "faqLink": "常见问题",
+    "bookLink": "立即预订",
+    "contactTitle": "联系方式",
+    "copyright": "All rights reserved."
   },
   "common": {
     "loading": "加载中...",

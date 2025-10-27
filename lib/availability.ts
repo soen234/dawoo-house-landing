@@ -142,3 +142,87 @@ export function getDateRange(start: string, end: string): string[] {
 
   return dates;
 }
+
+/**
+ * 날짜별 가격 정보를 가져옵니다.
+ * @param roomId 객실 ID
+ * @param checkIn 체크인 날짜 (YYYY-MM-DD)
+ * @param checkOut 체크아웃 날짜 (YYYY-MM-DD)
+ * @returns 날짜별 가격 배열
+ */
+export async function getDailyPrices(
+  roomId: string,
+  checkIn: string,
+  checkOut: string
+): Promise<{ date: string; price: number }[]> {
+  const dates = getDateRange(checkIn, checkOut);
+
+  // pricing 테이블에서 날짜별 가격 조회
+  const { data: pricing, error } = await supabase
+    .from('pricing')
+    .select('date, price')
+    .eq('room_id', roomId)
+    .gte('date', checkIn)
+    .lt('date', checkOut)
+    .order('date', { ascending: true });
+
+  // base_price 조회
+  const { data: room } = await supabase
+    .from('rooms')
+    .select('base_price')
+    .eq('id', roomId)
+    .single();
+
+  const basePrice = room?.base_price || 0;
+
+  // 날짜별로 가격 매핑
+  return dates.map(date => {
+    const priceInfo = pricing?.find(p => p.date === date);
+    return {
+      date,
+      price: priceInfo ? Number(priceInfo.price) : basePrice
+    };
+  });
+}
+
+/**
+ * 객실의 향후 가격 정보를 가져옵니다 (오늘부터 3개월)
+ * @param roomId 객실 ID
+ * @returns 날짜별 가격 배열
+ */
+export async function getRoomUpcomingPrices(
+  roomId: string
+): Promise<{ date: string; price: number }[]> {
+  const today = new Date().toISOString().split('T')[0];
+  const threeMonthsLater = new Date();
+  threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
+  const endDate = threeMonthsLater.toISOString().split('T')[0];
+
+  // pricing 테이블에서 날짜별 가격 조회
+  const { data: pricing } = await supabase
+    .from('pricing')
+    .select('date, price')
+    .eq('room_id', roomId)
+    .gte('date', today)
+    .lte('date', endDate)
+    .order('date', { ascending: true });
+
+  // base_price 조회
+  const { data: room } = await supabase
+    .from('rooms')
+    .select('base_price')
+    .eq('id', roomId)
+    .single();
+
+  const basePrice = room?.base_price || 0;
+
+  // 모든 날짜에 대한 가격 매핑
+  const dates = getDateRange(today, endDate);
+  return dates.map(date => {
+    const priceInfo = pricing?.find(p => p.date === date);
+    return {
+      date,
+      price: priceInfo ? Number(priceInfo.price) : basePrice
+    };
+  });
+}

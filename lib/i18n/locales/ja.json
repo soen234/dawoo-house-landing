@@ -42,6 +42,43 @@
     "unavailable": "予約不可",
     "capacity": "名"
   },
+  "roomTypes": {
+    "single": "シングルルーム",
+    "double": "ダブルルーム",
+    "triple": "トリプルルーム",
+    "quad": "クアッドルーム",
+    "dormitory": "女性専用ドミトリーベッド"
+  },
+  "roomDetails": {
+    "single": {
+      "size": "10㎡",
+      "beds": "ダブルベッド1台",
+      "description": "1人用のコンパクトな空間。10㎡、ダブルベッド1台。"
+    },
+    "double": {
+      "size": "13㎡",
+      "beds": "ダブルベッド1台",
+      "description": "1~2名様に最適な基本タイプ。13㎡、ダブルベッド1台。"
+    },
+    "triple": {
+      "size": "16㎡",
+      "beds": "スーパーシングル1台 + ダブル1台",
+      "description": "3名様向けお得タイプ。スーパーシングル1台 + ダブル1台。"
+    },
+    "quad": {
+      "size": "19㎡",
+      "beds": "ダブル2台 + スーパーシングル1台",
+      "description": "ファミリー/グループに最適。ダブル2台 + スーパーシングル1台。"
+    },
+    "dormitory": {
+      "size": "40㎡",
+      "beds": "スーパーシングルベッド5台",
+      "description": "女性専用5ベッドドミトリー。広い共用スペース付き。"
+    },
+    "sizeLabel": "サイズ:",
+    "bedsLabel": "ベッド:",
+    "viewDetails": "詳細を見る"
+  },
   "booking": {
     "title": "客室予約",
     "selectRoom": "客室選択",
@@ -168,6 +205,62 @@
         "content": "予約後、メッセンジャーを追加してチェックイン日とお名前をお送りください。連絡が難しい場合はご入力いただいたメールアドレスにご案内します。"
       }
     }
+  },
+  "about": {
+    "title": "ダウゲストハウスの物語",
+    "story1": "私たちのゲストハウスは2018年に11室でオープンし、",
+    "story1Bold": "ダウハウスは多くの友達を意味",
+    "story1End": "します。「お客様は友達であり、多くの友達のおかげでこの空間が存在する」という考えを反映した名前です。",
+    "safestay": "本宿泊施設は",
+    "safestayBold": "Safestayキャンペーン",
+    "safestayEnd": "に参加する合法宿泊施設です。",
+    "businessNumber": "事業者登録番号:",
+    "licenseNumber": "許可番号:",
+    "goal": "ダウゲストハウスは",
+    "goalBold": "ホンデで最も愛されるゲストハウス",
+    "goalEnd": "を目指しています。すべての拠点は空港鉄道AREX利用が便利で、ホンデ・ヨンナムドン・ソギョドンを楽しむのに最適な位置にあります。",
+    "facilities": "ホテル級の寝具と環境に優しいインテリアを使用し、専門の清掃スタッフがすべての客室を常に快適に管理しています。また、1対1のカスタマイズ対応で真の休息を提供いたします。",
+    "mission": "絶え間ない創造と挑戦で差別化された価値を提示する「ホンデらしい」ゲストハウスに成長します。"
+  },
+  "contact": {
+    "title": "お問い合わせ方法",
+    "description": "客室準備やお客様対応で電話がつながりにくい場合が多いです。メッセンジャーまたはメールでご連絡ください。",
+    "qrText": "QRコードで追加",
+    "email": "メール",
+    "phone": "電話番号",
+    "phoneWarning": "⚠️ 電話はつながりにくい場合があります。緊急でない場合はメッセンジャー/メールをご利用ください。",
+    "wechatID": "WeChat ID"
+  },
+  "reviews": {
+    "title": "お客様レビュー",
+    "subtitle": "ダウハウスでの体験をご確認ください",
+    "overall": "総合評価",
+    "reviewsCount": "件のレビュー",
+    "staff": "スタッフ",
+    "cleanliness": "清潔度",
+    "location": "立地",
+    "facilities": "施設",
+    "comfort": "快適さ",
+    "value": "コスパ",
+    "wifi": "Wi-Fi",
+    "translated": "翻訳済み",
+    "originalText": "原文を見る",
+    "reply": "返信する",
+    "newBadge": "新着!"
+  },
+  "footer": {
+    "subtitle": "ホンデ入口駅徒歩5分",
+    "legal": "合法ゲストハウス",
+    "businessNumber": "事業者登録番号:",
+    "licenseNumber": "許可番号:",
+    "quickLinks": "クイックリンク",
+    "roomsLink": "客室案内",
+    "locationLink": "アクセス",
+    "reviewsLink": "レビュー",
+    "faqLink": "よくある質問",
+    "bookLink": "予約する",
+    "contactTitle": "お問い合わせ",
+    "copyright": "All rights reserved."
   },
   "common": {
     "loading": "読み込み中...",

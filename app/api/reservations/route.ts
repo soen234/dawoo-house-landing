@@ -40,6 +40,7 @@ export async function POST(request: Request) {
       .from('reservations')
       .insert({
         id: reservationId,
+        organization_id: '00000000-0000-0000-0000-000000000001',
         room_id,
         channel: 'website',
         channel_reservation_id: `WEB-${Date.now()}`,
@@ -49,7 +50,7 @@ export async function POST(request: Request) {
         check_in,
         check_out,
         number_of_guests,
-        total_price,
+        total_price: Number(total_price) || 0,
         currency: 'KRW',
         status: 'CONFIRMED',
         payment_method: payment_method || null,

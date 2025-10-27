@@ -49,6 +49,15 @@ export default function Hero() {
             </Link>
           </div>
 
+          {/* Building Image */}
+          <div className="mt-12 rounded-2xl overflow-hidden shadow-xl max-w-4xl mx-auto">
+            <img
+              src="/images/building.jpg"
+              alt="다우하우스 건물"
+              className="w-full h-auto object-cover"
+            />
+          </div>
+
           {/* Stats */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">

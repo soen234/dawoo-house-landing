@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import DateRangePicker from '@/components/DateRangePicker';
+import PhoneInput from '@/components/PhoneInput';
 import { type RoomWithAvailability } from '@/lib/supabase';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
@@ -23,6 +24,8 @@ export default function BookPage() {
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
+  const [dailyPrices, setDailyPrices] = useState<{ date: string; price: number }[]>([]);
+  const [allPrices, setAllPrices] = useState<{ date: string; price: number }[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,6 +43,12 @@ export default function BookPage() {
   }, [searchParams]);
 
   useEffect(() => {
+    if (selectedRoomId) {
+      fetchRoomPrices(selectedRoomId);
+    }
+  }, [selectedRoomId]);
+
+  useEffect(() => {
     if (selectedRoomId && checkIn && checkOut) {
       calculatePrice();
     }
@@ -55,6 +64,18 @@ export default function BookPage() {
     }
   };
 
+  const fetchRoomPrices = async (roomId: string) => {
+    try {
+      const response = await fetch(`/api/rooms/${roomId}/prices`);
+      const data = await response.json();
+      if (data.prices) {
+        setAllPrices(data.prices);
+      }
+    } catch (err) {
+      console.error('Failed to fetch room prices:', err);
+    }
+  };
+
   const calculatePrice = async () => {
     try {
       const response = await fetch(
@@ -64,6 +85,9 @@ export default function BookPage() {
 
       if (data.totalPrice) {
         setTotalPrice(data.totalPrice);
+      }
+      if (data.dailyPrices) {
+        setDailyPrices(data.dailyPrices);
       }
     } catch (err) {
       console.error('Failed to calculate price:', err);
@@ -119,6 +143,30 @@ export default function BookPage() {
     ? Math.ceil((new Date(checkOut).getTime() - new Date(checkIn).getTime()) / (1000 * 60 * 60 * 24))
     : 0;
 
+  const getRoomTypeName = (type: string, name?: string) => {
+    // Normalize type to lowercase
+    let normalizedType = type?.toLowerCase() || '';
+
+    // If type is not standard, try to infer from name
+    if (!normalizedType || !['single', 'double', 'triple', 'quad', 'dormitory'].includes(normalizedType)) {
+      const lowerName = (name || '').toLowerCase();
+      if (lowerName.includes('single') || lowerName.includes('1인') || lowerName.includes('싱글')) {
+        normalizedType = 'single';
+      } else if (lowerName.includes('double') || lowerName.includes('2인') || lowerName.includes('더블')) {
+        normalizedType = 'double';
+      } else if (lowerName.includes('triple') || lowerName.includes('3인') || lowerName.includes('트리플')) {
+        normalizedType = 'triple';
+      } else if (lowerName.includes('quad') || lowerName.includes('4인') || lowerName.includes('쿼드')) {
+        normalizedType = 'quad';
+      } else if (lowerName.includes('dorm') || lowerName.includes('도미')) {
+        normalizedType = 'dormitory';
+      }
+    }
+
+    const typeKey = normalizedType as 'single' | 'double' | 'triple' | 'quad' | 'dormitory';
+    return t.roomTypes?.[typeKey] || name || type;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -140,12 +188,12 @@ export default function BookPage() {
               value={selectedRoomId}
               onChange={(e) => setSelectedRoomId(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 font-semibold focus:ring-2 focus:ring-green-500 focus:border-transparent"
             >
               <option value="">{t.booking.selectRoomPlaceholder}</option>
               {rooms.map((room) => (
-                <option key={room.id} value={room.id}>
-                  {room.name} - {room.type} (₩{room.base_price.toLocaleString()}{t.rooms.perNight})
+                <option key={room.id} value={room.id} className="text-gray-900 font-semibold">
+                  {getRoomTypeName(room.type, room.name)}
                 </option>
               ))}
             </select>
@@ -158,11 +206,31 @@ export default function BookPage() {
               startDate={checkIn}
               endDate={checkOut}
               onDateChange={handleDateChange}
+              dailyPrices={allPrices}
             />
             {nights > 0 && (
               <p className="mt-4 text-sm text-gray-600">
                 {t.booking.totalNights} <span className="font-semibold text-gray-900">{nights}{t.booking.nights}</span> {t.booking.stay}
               </p>
+            )}
+
+            {/* 날짜별 가격 정보 */}
+            {dailyPrices.length > 0 && (
+              <div className="mt-6 bg-gray-50 rounded-lg p-4">
+                <h3 className="text-sm font-bold text-gray-900 mb-3">날짜별 요금</h3>
+                <div className="space-y-2">
+                  {dailyPrices.map((item) => (
+                    <div key={item.date} className="flex justify-between items-center text-sm">
+                      <span className="text-gray-700 font-medium">{item.date}</span>
+                      <span className="text-gray-900 font-bold">₩{item.price.toLocaleString()}</span>
+                    </div>
+                  ))}
+                  <div className="pt-3 mt-3 border-t border-gray-300 flex justify-between items-center">
+                    <span className="text-base font-bold text-gray-900">총 요금</span>
+                    <span className="text-lg font-bold text-green-600">₩{totalPrice.toLocaleString()}</span>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
 
@@ -179,7 +247,7 @@ export default function BookPage() {
                   value={guestName}
                   onChange={(e) => setGuestName(e.target.value)}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 font-semibold focus:ring-2 focus:ring-green-500 focus:border-transparent"
                   placeholder={t.booking.namePlaceholder}
                 />
               </div>
@@ -191,7 +259,7 @@ export default function BookPage() {
                   type="email"
                   value={guestEmail}
                   onChange={(e) => setGuestEmail(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 font-semibold focus:ring-2 focus:ring-green-500 focus:border-transparent"
                   placeholder={t.booking.emailPlaceholder}
                 />
               </div>
@@ -199,12 +267,9 @@ export default function BookPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   {t.booking.phone}
                 </label>
-                <input
-                  type="tel"
+                <PhoneInput
                   value={guestPhone}
-                  onChange={(e) => setGuestPhone(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  placeholder={t.booking.phonePlaceholder}
+                  onChange={setGuestPhone}
                 />
               </div>
               <div>
@@ -215,10 +280,10 @@ export default function BookPage() {
                   value={numberOfGuests}
                   onChange={(e) => setNumberOfGuests(Number(e.target.value))}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 font-semibold focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 >
                   {[1, 2, 3, 4, 5, 6].map((num) => (
-                    <option key={num} value={num}>
+                    <option key={num} value={num} className="text-gray-900 font-semibold">
                       {num}{t.booking.guestsCount}
                     </option>
                   ))}
@@ -320,18 +385,18 @@ export default function BookPage() {
               <h2 className="text-xl font-bold text-gray-900 mb-4">{t.booking.summary}</h2>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-gray-700">{t.booking.room}</span>
-                  <span className="font-semibold">{selectedRoom.name}</span>
+                  <span className="text-gray-900 font-semibold">{t.booking.room}</span>
+                  <span className="font-bold text-gray-900">{getRoomTypeName(selectedRoom.type, selectedRoom.name)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-700">{t.booking.period}</span>
-                  <span className="font-semibold">
+                  <span className="text-gray-900 font-semibold">{t.booking.period}</span>
+                  <span className="font-bold text-gray-900">
                     {checkIn} ~ {checkOut} ({nights}{t.booking.nights})
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-700">{t.booking.guests}</span>
-                  <span className="font-semibold">{numberOfGuests}{t.booking.guestsCount}</span>
+                  <span className="text-gray-900 font-semibold">{t.booking.guests}</span>
+                  <span className="font-bold text-gray-900">{numberOfGuests}{t.booking.guestsCount}</span>
                 </div>
                 <div className="border-t border-gray-300 mt-4 pt-4">
                   <div className="flex justify-between text-lg">
