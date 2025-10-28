@@ -5,6 +5,10 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   try {
+    // Debug: Log environment variables status
+    console.log('Supabase URL configured:', !!process.env.NEXT_PUBLIC_SUPABASE_URL);
+    console.log('Supabase Key configured:', !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+
     const { searchParams } = new URL(request.url);
     const checkIn = searchParams.get('check_in');
     const checkOut = searchParams.get('check_out');
@@ -18,7 +22,12 @@ export async function GET(request: Request) {
     if (error) {
       console.error('Rooms query error:', error);
       return NextResponse.json(
-        { error: 'Failed to fetch rooms' },
+        {
+          error: 'Failed to fetch rooms',
+          details: error.message,
+          hint: error.hint,
+          code: error.code
+        },
         { status: 500 }
       );
     }
@@ -72,8 +81,13 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     console.error('API error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Internal server error' },
+      {
+        error: 'Internal server error',
+        details: errorMessage,
+        stack: error instanceof Error ? error.stack : undefined
+      },
       { status: 500 }
     );
   }
