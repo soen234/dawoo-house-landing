@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -9,7 +9,7 @@ import PhoneInput from '@/components/PhoneInput';
 import { type RoomWithAvailability } from '@/lib/supabase';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
-export default function BookPage() {
+function BookPageContent() {
   const { t } = useLanguage();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -423,5 +423,24 @@ export default function BookPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function BookPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-gray-200 border-t-green-600"></div>
+            <p className="mt-4 text-gray-600">Loading...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    }>
+      <BookPageContent />
+    </Suspense>
   );
 }
