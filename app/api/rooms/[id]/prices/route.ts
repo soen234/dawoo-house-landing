@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getRoomUpcomingPrices } from '@/lib/availability';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
