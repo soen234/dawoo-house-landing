@@ -17,6 +17,7 @@ export async function POST(request: Request) {
       number_of_guests,
       total_price,
       payment_method,
+      paypal_order_id,
     } = body;
 
     // 필수 필드 검증
@@ -56,6 +57,7 @@ export async function POST(request: Request) {
         currency: 'KRW',
         status: 'CONFIRMED',
         payment_method: payment_method || null,
+        paypal_order_id: paypal_order_id || null,
       })
       .select()
       .single();

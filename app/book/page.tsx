@@ -2,6 +2,7 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import DateRangePicker from '@/components/DateRangePicker';
@@ -99,38 +100,51 @@ function BookPageContent() {
     setCheckOut(end);
   };
 
+  const createReservation = async (paypalOrderId?: string) => {
+    const response = await fetch('/api/reservations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        room_id: selectedRoomId,
+        check_in: checkIn,
+        check_out: checkOut,
+        guest_name: guestName,
+        guest_email: guestEmail,
+        guest_phone: guestPhone,
+        number_of_guests: numberOfGuests,
+        total_price: totalPrice,
+        payment_method: paymentMethod,
+        paypal_order_id: paypalOrderId,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to create reservation');
+    }
+
+    return data.reservation;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // PayPal 결제는 PayPal 버튼으로 처리
+    if (paymentMethod === 'paypal') {
+      setError('Please use the PayPal button below to complete your payment');
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch('/api/reservations', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          room_id: selectedRoomId,
-          check_in: checkIn,
-          check_out: checkOut,
-          guest_name: guestName,
-          guest_email: guestEmail,
-          guest_phone: guestPhone,
-          number_of_guests: numberOfGuests,
-          total_price: totalPrice,
-          payment_method: paymentMethod,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to create reservation');
-      }
-
+      const reservation = await createReservation();
       // 예약 성공 시 확인 페이지로 이동
-      router.push(`/book/confirmation?id=${data.reservation.id}`);
+      router.push(`/book/confirmation?id=${reservation.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create reservation');
     } finally {
@@ -411,13 +425,95 @@ function BookPageContent() {
           )}
 
           {/* 제출 버튼 */}
-          <button
-            type="submit"
-            disabled={loading || !selectedRoomId || !checkIn || !checkOut || !guestName || !paymentMethod}
-            className="w-full py-4 bg-green-600 text-white text-lg font-semibold rounded-lg hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
-          >
-            {loading ? t.booking.submitting : t.booking.submit}
-          </button>
+          {paymentMethod === 'paypal' ? (
+            <div className="space-y-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
+                {t.booking.paymentPaypalButtonNote || 'Please click the PayPal button below to complete your payment'}
+              </div>
+              {selectedRoomId && checkIn && checkOut && guestName && totalPrice > 0 ? (
+                <PayPalScriptProvider
+                  options={{
+                    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || '',
+                    currency: 'USD',
+                  }}
+                >
+                  <PayPalButtons
+                    style={{ layout: 'horizontal', label: 'pay' }}
+                    disabled={loading || !selectedRoomId || !checkIn || !checkOut || !guestName}
+                    createOrder={async () => {
+                      try {
+                        setLoading(true);
+                        const response = await fetch('/api/paypal/create-order', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            amount: totalPrice,
+                            currency: 'USD',
+                            description: `Da-woo House - ${selectedRoom?.name} (${nights} nights)`,
+                          }),
+                        });
+
+                        const data = await response.json();
+                        if (!response.ok) {
+                          throw new Error(data.error || 'Failed to create PayPal order');
+                        }
+
+                        return data.orderID;
+                      } catch (err) {
+                        setError(err instanceof Error ? err.message : 'PayPal error');
+                        throw err;
+                      } finally {
+                        setLoading(false);
+                      }
+                    }}
+                    onApprove={async (data) => {
+                      try {
+                        setLoading(true);
+                        setError(null);
+
+                        // Capture the PayPal order
+                        const captureResponse = await fetch('/api/paypal/capture-order', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ orderID: data.orderID }),
+                        });
+
+                        const captureData = await captureResponse.json();
+                        if (!captureResponse.ok) {
+                          throw new Error(captureData.error || 'Failed to capture payment');
+                        }
+
+                        // Create reservation with PayPal order ID
+                        const reservation = await createReservation(data.orderID);
+                        router.push(`/book/confirmation?id=${reservation.id}`);
+                      } catch (err) {
+                        setError(err instanceof Error ? err.message : 'Failed to complete reservation');
+                      } finally {
+                        setLoading(false);
+                      }
+                    }}
+                    onError={(err) => {
+                      console.error('PayPal error:', err);
+                      setError('PayPal payment failed. Please try again.');
+                      setLoading(false);
+                    }}
+                  />
+                </PayPalScriptProvider>
+              ) : (
+                <div className="w-full py-4 bg-gray-300 text-gray-600 text-lg font-semibold rounded-lg text-center cursor-not-allowed">
+                  {t.booking.fillRequiredFields || 'Please fill all required fields'}
+                </div>
+              )}
+            </div>
+          ) : (
+            <button
+              type="submit"
+              disabled={loading || !selectedRoomId || !checkIn || !checkOut || !guestName || !paymentMethod}
+              className="w-full py-4 bg-green-600 text-white text-lg font-semibold rounded-lg hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            >
+              {loading ? t.booking.submitting : t.booking.submit}
+            </button>
+          )}
         </form>
       </main>
 
