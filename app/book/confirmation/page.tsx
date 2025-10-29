@@ -202,7 +202,7 @@ function ConfirmationContent() {
                 <div className="flex justify-between py-4 bg-green-50 rounded-lg px-4 mt-4">
                   <span className="text-lg font-bold text-gray-900">총 결제 금액</span>
                   <span className="text-2xl font-bold text-green-600">
-                    ₩{reservation.total_price.toLocaleString()}
+                    ${reservation.total_price.toLocaleString()}
                   </span>
                 </div>
               </div>

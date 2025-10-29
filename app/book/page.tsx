@@ -236,12 +236,12 @@ function BookPageContent() {
                   {dailyPrices.map((item) => (
                     <div key={item.date} className="flex justify-between items-center text-sm">
                       <span className="text-gray-700 font-medium">{item.date}</span>
-                      <span className="text-gray-900 font-bold">₩{item.price.toLocaleString()}</span>
+                      <span className="text-gray-900 font-bold">${item.price.toLocaleString()}</span>
                     </div>
                   ))}
                   <div className="pt-3 mt-3 border-t border-gray-300 flex justify-between items-center">
                     <span className="text-base font-bold text-gray-900">총 요금</span>
-                    <span className="text-lg font-bold text-green-600">₩{totalPrice.toLocaleString()}</span>
+                    <span className="text-lg font-bold text-green-600">${totalPrice.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
@@ -378,16 +378,6 @@ function BookPageContent() {
                   <p className="text-sm text-gray-600 mt-1">
                     {t.booking.paymentPaypalDesc}
                   </p>
-                  {paymentMethod === 'paypal' && (
-                    <div className="mt-3 p-3 bg-blue-50 rounded-lg text-sm">
-                      <p className="text-blue-800">
-                        {t.booking.paymentPaypalAccount}
-                      </p>
-                      <p className="text-xs text-blue-700 mt-2">
-                        {t.booking.paymentPaypalNote}
-                      </p>
-                    </div>
-                  )}
                 </div>
               </label>
             </div>
@@ -416,7 +406,7 @@ function BookPageContent() {
                   <div className="flex justify-between text-lg">
                     <span className="font-bold text-gray-900">{t.booking.totalPrice}</span>
                     <span className="font-bold text-green-600">
-                      ₩{totalPrice.toLocaleString()}
+                      ${totalPrice.toLocaleString()}
                     </span>
                   </div>
                 </div>
@@ -426,21 +416,21 @@ function BookPageContent() {
 
           {/* 제출 버튼 */}
           {paymentMethod === 'paypal' ? (
-            <div className="space-y-4">
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
-                {t.booking.paymentPaypalButtonNote || 'Please click the PayPal button below to complete your payment'}
-              </div>
+            <>
               {selectedRoomId && checkIn && checkOut && guestName && totalPrice > 0 ? (
                 <PayPalScriptProvider
                   options={{
                     clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || '',
                     currency: 'USD',
+                    intent: 'capture',
+                    disableFunding: 'card,credit',
                   }}
                 >
-                  <PayPalButtons
-                    style={{ layout: 'horizontal', label: 'pay' }}
-                    disabled={loading || !selectedRoomId || !checkIn || !checkOut || !guestName}
-                    createOrder={async () => {
+                  <div className="w-full">
+                    <PayPalButtons
+                      style={{ layout: 'vertical', label: 'pay', height: 55 }}
+                      disabled={loading || !selectedRoomId || !checkIn || !checkOut || !guestName}
+                      createOrder={async () => {
                       try {
                         setLoading(true);
                         const response = await fetch('/api/paypal/create-order', {
@@ -498,13 +488,14 @@ function BookPageContent() {
                       setLoading(false);
                     }}
                   />
+                  </div>
                 </PayPalScriptProvider>
               ) : (
                 <div className="w-full py-4 bg-gray-300 text-gray-600 text-lg font-semibold rounded-lg text-center cursor-not-allowed">
                   {t.booking.fillRequiredFields || 'Please fill all required fields'}
                 </div>
               )}
-            </div>
+            </>
           ) : (
             <button
               type="submit"

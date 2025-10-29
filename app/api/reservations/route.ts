@@ -54,7 +54,7 @@ export async function POST(request: Request) {
         check_out,
         number_of_guests,
         total_price: Number(total_price) || 0,
-        currency: 'KRW',
+        currency: 'USD',
         status: 'CONFIRMED',
         payment_method: payment_method || null,
         paypal_order_id: paypal_order_id || null,

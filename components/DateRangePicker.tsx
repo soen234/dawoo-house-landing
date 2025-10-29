@@ -237,7 +237,7 @@ export default function DateRangePicker({
               <span className="text-base font-bold">{new Date(day.date).getDate()}</span>
               {price && day.isCurrentMonth && !disabled && (
                 <span className={`text-[10px] mt-0.5 ${selected ? 'text-white' : 'text-gray-600'}`}>
-                  ₩{(price / 1000).toFixed(0)}k
+                  ${(price / 1000).toFixed(0)}k
                 </span>
               )}
             </button>
