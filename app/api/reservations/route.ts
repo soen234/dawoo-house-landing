@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { checkRoomAvailability, getDateRange } from '@/lib/availability';
+import { sendTelegramMessage, formatReservationMessage } from '@/lib/telegram';
 
 export const dynamic = 'force-dynamic';
 
@@ -68,6 +69,25 @@ export async function POST(request: Request) {
         { error: 'Failed to create reservation' },
         { status: 500 }
       );
+    }
+
+    // 텔레그램 알림 전송
+    try {
+      const message = formatReservationMessage({
+        guest_name,
+        guest_email: guest_email || null,
+        guest_phone: guest_phone || null,
+        check_in,
+        check_out,
+        number_of_guests,
+        total_price: Number(total_price) || 0,
+        payment_method: payment_method || null,
+        channel_reservation_id: `WEB-${Date.now()}`,
+      });
+      await sendTelegramMessage(message);
+    } catch (telegramError) {
+      // 텔레그램 알림 실패는 예약 프로세스를 중단하지 않음
+      console.error('Telegram notification failed:', telegramError);
     }
 
     // 재고 차감
