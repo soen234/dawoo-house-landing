@@ -116,7 +116,8 @@
     "totalPrice": "总价",
     "submitting": "预订中...",
     "submit": "立即预订",
-    "required": "*"
+    "required": "*",
+    "fillRequiredFields": "请填写所有必填项"
   },
   "location": {
     "title": "位置",

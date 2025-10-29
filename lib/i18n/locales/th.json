@@ -116,7 +116,8 @@
     "totalPrice": "ราคารวม",
     "submitting": "กำลังจอง...",
     "submit": "จองเลย",
-    "required": "*"
+    "required": "*",
+    "fillRequiredFields": "กรุณากรอกข้อมูลที่จำเป็นทั้งหมด"
   },
   "location": {
     "title": "ที่ตั้ง",
